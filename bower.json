@@ -1,0 +1,23 @@
+{
+  "name": "PrivateChat",
+  "version": "0.0.1",
+  "homepage": "https://github.com/kp96/PrivateChat",
+  "description": "A private chat client built with node.js and socket.io",
+  "keywords": [
+    "chat-client"
+  ],
+  "authors": [
+    "Krishna Kalubandi"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}
