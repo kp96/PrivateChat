@@ -1,7 +1,8 @@
 # Logs
 logs
 *.log
-
+#intellij 
+.idea/
 #bower components
 bower_components/
 
