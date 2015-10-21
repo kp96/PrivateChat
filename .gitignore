@@ -2,6 +2,9 @@
 logs
 *.log
 
+#bower components
+bower_components/
+
 # Visual Studio Code
 .settings/
 

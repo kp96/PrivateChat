@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/stylesheets/chat.css" rel="stylesheet">
+</head>
+<body>
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/firebase/firebase.js"></script>
+    <script src="/bower_components/angularfire/dist/angularfire.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/public/js/controllers/angchat.js"></script>
+    <script src="/public/js/services.js"></script>
+
+
+    <div class="container" ng-app="privatechat" ng-controller="messageController">
+        <h1></h1>
+        <div class="row row-eq-height">
+            <div class="col-md-9 no-float" id="chatwindow">
+                <div class="row" id="messagebox">
+                    <div id="future">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 no-float" id="#whoseonline">
+
+            </div>
+
+        </div>
+        <div class="panel-footer">
+            <form class="form-inline" ng-submit="submit()">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="chat_input" placeholder="Enter your message" >
+                    <button type="submit" class="btn btn-default">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</body>
+</html>
