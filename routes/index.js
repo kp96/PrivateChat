@@ -17,10 +17,10 @@ router.post('/signup',function(req,res,next){
     } else {
       var extra = {};
       console.log("Successfully created user account with uid:", userData.uid);
-      var usersRef = ref.child('users');
-      extra[userData.uid]= {
+      var usersRef = ref.child('users/' + userData.uid);
+      var extra= {
         nick : req.body.nick
-      }
+      };
       usersRef.set(extra);
       res.redirect('/?success=1');
     }
@@ -34,17 +34,18 @@ router.post('/signin',function(req,res,next){
   }, function(error, authData) {
 
     if(!error){
-      var usersRef = ref.child('users');
+      var usersRef = ref.child('users/' + authData.uid);
       usersRef.once('value',function(data){
+        console.log(data.val())
         var json = data.val();
         var uid = authData.uid;
-        var redurl = '/chat?nick=' + json[uid].nick + '&gravatar=' + authData.password.profileImageURL;
+        var redurl = '/chat?nick=' + json.nick + '&gravatar=' + authData.password.profileImageURL;
         res.redirect(redurl);
       });
 
     }
     else {
-      console.log(error);
+      res.redirect('/login_code=0');
     }
   }, {
     remember: "sessionOnly"

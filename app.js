@@ -23,9 +23,9 @@ app.use('/validate',validate);
 app.use('/chat',chat);
 io.on('connection', function(client) {  
     console.log('Client connected...');
-
     client.on('join', function(data) {
-        console.log(data);
+        client.emit('online',data);
+        client.broadcast.emit('online',data);
     });
     client.on('messages',function(data){
         client.emit('broad',data);

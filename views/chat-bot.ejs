@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <![endif]-->
     <title>Welcome to private chat</title>
-    <link href="/public/stylesheets/bootstrap.css" rel="stylesheet" />
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 
 </head>
 <body style="font-family:Verdana">
@@ -17,12 +17,15 @@
 <script src="/bower_components/angular/angular.min.js"></script>
 <script src="/bower_components/firebase/firebase.js"></script>
 <script src="/bower_components/angularfire/dist/angularfire.min.js"></script>
+<script src="/bower_components/angular-route/angular-route.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/public/js/controllers/angchatbot.js"></script>
 <script src="/public/js/services.js"></script>
+<script src="/public/js/backstretch.js"></script>
+<script src="/bower_components/angular-scroll-glue/src/scrollglue.js"></script>
 <div class="container" ng-app="chatbot" ng-controller="chatController">
     <div class="row " style="padding-top:40px;">
-        <h3 class="text-center" >Private Chat Served! </h3>
+        <h3 class="text-center" style="color: #fff;" >Private Chat Served! </h3>
         <br /><br />
         <div class="col-md-8">
             <div class="panel panel-info">
@@ -30,10 +33,7 @@
                         >
                     RECENT CHAT HISTORY
                 </div>
-                <div class="panel-body">
-                    <div id="future">
-
-                    </div>
+                <div class="panel-body" id="chat-panel" style="height:400px;overflow-y: scroll; overflow-x: hidden" scroll-glue>
                     <ul class="media-list">
                         <li class="media" ng-repeat="message in messages">
                             <div class="media-body">
@@ -55,10 +55,11 @@
                 </div>
                 <div class="panel-footer">
                     <div class="input-group">
-                        <form ng-submit="submit()" class="form-inline">
-                            <input type="text" ng-model="user.message" class="form-control" placeholder="Enter Message" />
-                            <input class="btn btn-info"  type="submit" value="Send"/>
-
+                        <form ng-submit="submit()" class="form-inline" >
+                            <input type="text" ng-model="user.message"  class="form-control" placeholder="Enter Message" ng-required="true"/>
+                            <span>
+                                <input class="btn btn-info"  type="submit" value="Send"/>
+                            </span>
                         </form>
                     </div>
                 </div>
@@ -69,18 +70,18 @@
                 <div class="panel-heading">
                     ONLINE USERS
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" style="height:400px;overflow-y: scroll; overflow-x: hidden">
                     <ul class="media-list">
-                        <li class="media" ng-repeat="message in messages">
+                        <li class="media" ng-repeat="user in users">
 
                             <div class="media-body">
 
                                 <div class="media">
                                     <a class="pull-left" href="#">
-                                        <img class="media-object img-circle" style="max-height:40px;" src={{message.img}} />
+                                        <img class="media-object img-circle" style="max-height:40px;" src={{user.img}} />
                                     </a>
                                     <div class="media-body" >
-                                        <h5>{{message.username}}  </h5>
+                                        <h5>{{user.username}}  </h5>
 
                                         <small class="text-muted">Online | Active</small>
                                     </div>
@@ -95,5 +96,8 @@
         </div>
     </div>
 </div>
+<script>
+    $.backstretch("/public/images/header.jpg");
+</script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-var app = angular.module("chatbot", ["firebase"]);
+var app = angular.module("chatbot", ['firebase','ngRoute','luegg.directives']);
 app.controller('chatController',function($scope, $firebaseArray, socket){
     socket.init();
     $scope.messages = [{content:'hello',username:'jason',img: 'http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50'}];
@@ -7,12 +7,14 @@ app.controller('chatController',function($scope, $firebaseArray, socket){
     socket.on('connect', function(data) {
         var name = $.urlParam('nick');
         var gravatar = $.urlParam('gravatar');
-        socket.emit('join', 'Hello World from client');
+        socket.emit('join', {username: name, img: gravatar});
 
     });
-    socket.on('broad',function(data){
+    socket.on('online',function(data) {
+        $scope.users = $scope.users.concat(data);
+    });
+    socket.on('broad',function(data) {
         $scope.messages = $scope.messages.concat(data);
-        $scope.users.concat({username: name, img: gravatar});
     });
 
     $scope.submit = function() {
