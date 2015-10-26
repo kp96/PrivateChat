@@ -45,7 +45,7 @@ router.post('/signin',function(req,res,next){
 
     }
     else {
-      res.redirect('/login_code=0');
+      res.redirect('/?login_code=0');
     }
   }, {
     remember: "sessionOnly"

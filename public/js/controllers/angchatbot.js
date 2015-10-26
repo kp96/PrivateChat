@@ -8,7 +8,7 @@ app.controller('chatController',function($scope, $firebaseArray, socket){
         var name = $.urlParam('nick');
         var gravatar = $.urlParam('gravatar');
         socket.emit('join', {username: name, img: gravatar});
-
+        $scope.messages = $firebaseArray(ref);
     });
     socket.on('online',function(data) {
         $scope.users = $scope.users.concat(data);
